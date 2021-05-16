@@ -2,7 +2,7 @@ import { selector } from 'recoil';
 import atoms from './atoms';
 import data from '../data/mockedData';
 
-const { searchValueAtom } = atoms;
+const { searchValueAtom, filterOptionAtom } = atoms;
 
 const fetchTasksDataSelector = selector({
   key: 'fetchTasksDataSelector',
@@ -47,10 +47,28 @@ const tasksCounterSelector = selector({
   },
 });
 
+const filteredTasksListSelector = selector({
+  key: 'filteredTasksListSelector',
+  get: ({ get }) => {
+    const filterOption = get(filterOptionAtom);
+    const tasksList = get(searchTasksSelector);
+
+    switch (filterOption) {
+      case 'uncompleted':
+        return tasksList.filter((task) => !task.completed);
+      case 'completed':
+        return tasksList.filter((task) => task.completed);
+      default:
+        return tasksList;
+    }
+  },
+});
+
 const selectors = {
   fetchTasksDataSelector,
   searchTasksSelector,
   tasksCounterSelector,
+  filteredTasksListSelector,
 };
 
 export default selectors;

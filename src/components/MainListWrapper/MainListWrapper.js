@@ -4,8 +4,8 @@ import { useRecoilValue } from 'recoil';
 import TasksList from '../TasksList/TaskList';
 
 const MainListWrapper = () => {
-  const { fetchTasksDataSelector } = selectors;
-  const tasksList = useRecoilValue(fetchTasksDataSelector);
+  const { filteredTasksListSelector } = selectors;
+  const tasksList = useRecoilValue(filteredTasksListSelector);
 
   return (
     <>
