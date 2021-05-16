@@ -1,9 +1,13 @@
 import React from 'react';
+import Loader from '../../components/Loader/Loader';
+import SearchListWrapper from '../../components/SearchListWrapper/SearchListWrapper';
 
 const SearchView = () => {
   return (
     <section>
-      <p>This is Search View</p>
+      <React.Suspense fallback={<Loader />}>
+        <SearchListWrapper />
+      </React.Suspense>
     </section>
   );
 };

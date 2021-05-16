@@ -1,12 +1,8 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import selectors from '../../recoil/selectors';
 import { Flex } from 'theme-ui';
 import Task from '../Task/Task';
 
-const TaskList = () => {
-  const { fetchTasksDataSelector } = selectors;
-  const tasksList = useRecoilValue(fetchTasksDataSelector);
+const TaskList = ({ tasksList }) => {
   return (
     <Flex sx={{ flexDirection: 'column' }}>
       {Object.keys(tasksList).map((item, i) => (

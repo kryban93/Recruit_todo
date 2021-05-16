@@ -1,3 +1,5 @@
+import { Flex } from '@theme-ui/components';
+
 const theme = {
   fonts: {
     body: 'system-ui,roboto, sans-serif',
@@ -26,6 +28,30 @@ const theme = {
     primary: '#a9f1df',
     secondary: '#233e8b',
     grey: '#e1e5ea',
+  },
+  buttons: {
+    primary: {
+      bg: '#fff',
+      cursor: 'pointer',
+    },
+    search: {
+      bg: 'grey',
+      cursor: 'pointer',
+      height: '35px',
+      borderRadius: '0px 25px 25px 0px',
+      display: 'flex',
+      alignItems: 'center',
+    },
+  },
+  forms: {
+    input: {
+      bg: 'grey',
+      border: 'none',
+      outline: 'none',
+      borderRadius: '25px 0px 0px 25px',
+      height: '35px',
+      width: '60%',
+    },
   },
   styles: {
     root: {
