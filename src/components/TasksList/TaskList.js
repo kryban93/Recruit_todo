@@ -1,6 +1,7 @@
 import React from 'react';
 import { Flex } from 'theme-ui';
 import Task from '../Task/Task';
+import PropTypes from 'prop-types';
 
 const TaskList = ({ tasksList }) => {
   return (
@@ -21,3 +22,7 @@ const TaskList = ({ tasksList }) => {
 };
 
 export default TaskList;
+
+TaskList.propTypes = {
+  tasksList: PropTypes.array.isRequired,
+};

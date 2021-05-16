@@ -1,5 +1,3 @@
-import { Flex } from '@theme-ui/components';
-
 const theme = {
   fonts: {
     body: 'system-ui,roboto, sans-serif',

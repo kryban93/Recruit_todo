@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { Flex } from 'theme-ui';
+import { Flex, Paragraph } from 'theme-ui';
 import selectors from '../../recoil/selectors';
 
 /** @jsxImportSource theme-ui */
@@ -11,9 +11,9 @@ const TasksCounter = () => {
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>
-      <p>
+      <Paragraph>
         completed: {completedTasksNum}/{totalTasksNum}
-      </p>
+      </Paragraph>
       <svg
         viewBox='0 0 36 36'
         sx={{
