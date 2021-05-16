@@ -29,9 +29,28 @@ const searchTasksSelector = selector({
   },
 });
 
+const tasksCounterSelector = selector({
+  key: 'tasksCounterSelector',
+  get: ({ get }) => {
+    let tasksList = get(fetchTasksDataSelector);
+
+    const totalTasksNum = tasksList.length;
+    const completedTasksNum = tasksList.filter((task) => task.completed).length;
+    const uncompletedTasksNum = tasksList.filter((task) => !task.completed).length;
+    const completedTasksPercentageNum = (completedTasksNum * 100) / totalTasksNum;
+    return {
+      totalTasksNum,
+      completedTasksNum,
+      uncompletedTasksNum,
+      completedTasksPercentageNum,
+    };
+  },
+});
+
 const selectors = {
   fetchTasksDataSelector,
   searchTasksSelector,
+  tasksCounterSelector,
 };
 
 export default selectors;
