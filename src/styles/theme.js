@@ -40,7 +40,7 @@ const theme = {
     text: '#000',
     background: '#fafafa',
     primary: '#6bc95b',
-    secondary: '#233e8b',
+    secondary: '#1d9335',
     grey: '#e1e5ea',
     warning: '#f55c47',
   },

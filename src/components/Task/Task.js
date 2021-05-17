@@ -1,15 +1,34 @@
 import React from 'react';
-import { Flex, Checkbox, Paragraph, Label, Box, Button, Image } from '@theme-ui/components';
+import { Flex, Paragraph, Label, Box, Button, Image } from '@theme-ui/components';
 import { useRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
 import PropTypes from 'prop-types';
 import icons from '../../assets/icons';
 
+/** @jsxImportSource theme-ui */
 const Task = ({ title, completed, id, created, updated, userId }) => {
   const { tasksListAtom } = atoms;
   const [atomTasksList, setAtomTasksList] = useRecoilState(tasksListAtom);
 
-  const toggleTaskComplete = () => {};
+  const toggleTaskComplete = () => {
+    let tempTasksArray = [...atomTasksList];
+    const index = tempTasksArray.findIndex((value) => value.id === id);
+    const toggledTask = {
+      title,
+      completed: !completed,
+      id,
+      created,
+      updated,
+      userId,
+    };
+
+    const newTasksList = [
+      ...atomTasksList.slice(0, index),
+      toggledTask,
+      ...atomTasksList.slice(index + 1),
+    ];
+    setAtomTasksList(newTasksList);
+  };
 
   const deleteTask = () => {
     const filteredTasksList = atomTasksList.filter((task) => task.id !== id);
@@ -31,16 +50,23 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
         transition: 'transform 0.2s ease-in',
 
         '&:hover': {
-          transform: 'scale(1.1)',
+          transform: 'scale(1.05)',
         },
       }}
     >
-      <input
-        type='checkbox'
-        onChange={toggleTaskComplete}
-        id={`checkbox_${id}`}
-        checked={completed}
-      />
+      <Label htmlFor={`checkbox_${id}`} sx={{ width: '40px' }}>
+        <Image
+          src={!completed ? icons.check_grey : icons.check_green}
+          alt={`${title} task complete button`}
+        />
+        <input
+          type='checkbox'
+          onChange={toggleTaskComplete}
+          id={`checkbox_${id}`}
+          checked={completed}
+          sx={{ display: 'none' }}
+        />
+      </Label>
       <Box sx={{ width: '90%', textAlign: 'left' }}>
         <Paragraph variant='title'>{title}</Paragraph>
         {
