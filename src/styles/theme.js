@@ -48,6 +48,7 @@ const theme = {
     primary: {
       bg: 'background',
       cursor: 'pointer',
+      p: '0',
     },
     search: {
       bg: 'grey',

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
 import logo from '../../assets/logo.svg';
-import { Flex, Image, Button, Input, Box } from 'theme-ui';
+import { Flex, Image, Button, Input } from 'theme-ui';
 import icons from '../../assets/icons';
 
 const Nav = () => {
@@ -15,10 +15,11 @@ const Nav = () => {
       as='nav'
       sx={{
         position: 'fixed',
+        left: '50%',
+        transform: 'translateX(-50%)',
         alignItems: 'center',
         justifyContent: 'space-between',
         width: ['100%', '85%', '75%', '50%'],
-        m: '0 auto',
         zIndex: 4,
         bg: 'background',
       }}

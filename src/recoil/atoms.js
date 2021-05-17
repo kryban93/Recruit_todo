@@ -1,14 +1,17 @@
 import { atom, selector } from 'recoil';
+import data from '../data/mockedData';
 
 const tasksListAtom = atom({
   key: 'tasksListAtom',
   default: selector({
     key: 'tasksListAtom/Default',
     get: async () => {
-      const response = await fetch('https://gorest.co.in/public-api/todos');
-      const data = await response.json();
+      //const response = await fetch('https://gorest.co.in/public-api/todos');
+      //const data = await response.json();
+      const mockedData = data;
 
-      return data.data;
+      return mockedData;
+      //return data.data;
     },
   }),
 });

@@ -11,6 +11,13 @@ const TasksFilterSelect = () => {
     <Select
       value={tasksFilterOption}
       onChange={(event) => setTasksFilterOption(event.target.value)}
+      sx={{
+        border: 'none',
+        borderBottom: '0.5px solid black',
+        borderRadius: 0,
+        outline: 'none',
+        cursor: 'pointer',
+      }}
     >
       <option>uncompleted</option>
       <option>completed</option>

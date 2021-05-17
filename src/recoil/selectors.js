@@ -25,7 +25,7 @@ const tasksCounterSelector = selector({
     const totalTasksNum = tasksList.length;
     const completedTasksNum = tasksList.filter((task) => task.completed).length;
     const uncompletedTasksNum = tasksList.filter((task) => !task.completed).length;
-    const completedTasksPercentageNum = (completedTasksNum * 100) / totalTasksNum;
+    const completedTasksPercentageNum = (completedTasksNum * 100) / totalTasksNum || 0;
     return {
       totalTasksNum,
       completedTasksNum,
