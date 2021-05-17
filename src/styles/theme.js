@@ -2,16 +2,20 @@ const theme = {
   fonts: {
     body: 'system-ui,roboto, sans-serif',
     heading: 'Titillium Web, sans-serif',
+    additional: 'arial , sans-serif',
   },
   fontWeights: {
     body: 400,
     heading: 600,
+    additional: 300,
   },
-  fontSizes: [12, 14, 16, 20, 24, 32, 48, 64],
+  fontSizes: [8, 14, 16, 20, 24, 32, 48, 64],
   lineHeights: {
     body: 1.5,
     heading: 1.75,
+    additional: 1.25,
   },
+  breakpoints: ['576px', '768px', '1024px', '1440px'],
   text: {
     heading: {
       fontFamily: 'heading',
@@ -19,17 +23,30 @@ const theme = {
       fontWeight: 'heading',
       fontSize: 5,
     },
+    title: {
+      fontFamily: 'body',
+      lineHeight: 'body',
+      fontWeight: 'body',
+      fontSize: 2,
+    },
+    additional: {
+      fontFamily: 'additional',
+      lineHeight: 'additional',
+      fontWeight: 'additional',
+      fontSize: 1,
+    },
   },
   colors: {
     text: '#000',
-    background: '#fff',
-    primary: '#a9f1df',
+    background: '#fafafa',
+    primary: '#6bc95b',
     secondary: '#233e8b',
     grey: '#e1e5ea',
+    warning: '#f55c47',
   },
   buttons: {
     primary: {
-      bg: '#fff',
+      bg: 'background',
       cursor: 'pointer',
     },
     search: {
@@ -43,6 +60,8 @@ const theme = {
   },
   forms: {
     input: {
+      fontFamily: 'body',
+      color: 'text',
       bg: 'grey',
       border: 'none',
       outline: 'none',
@@ -51,12 +70,7 @@ const theme = {
       width: '60%',
     },
   },
-  styles: {
-    root: {
-      fontFamily: 'body',
-      fontWeight: 'body',
-    },
-  },
+  styles: {},
 };
 
 export default theme;

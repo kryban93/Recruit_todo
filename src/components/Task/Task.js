@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Flex, Checkbox, Paragraph, Label } from '@theme-ui/components';
+import { Flex, Checkbox, Paragraph, Label, Box } from '@theme-ui/components';
 import PropTypes from 'prop-types';
 
 const Task = ({ title, completed, id, created, updated, userId }) => {
@@ -7,22 +7,30 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
   const toggleTaskComplete = () => {
     console.log('lol');
   };
+
+  //const formattedCreatedDate = Date(created);
   return (
     <Flex
       sx={{
         alignItems: 'center',
         justifyContent: 'space-between',
         m: '5px',
-        borderBottom: '0.5px solid #aaa',
+        p: '5px',
         boxShadow: '1px 1px 2px rgba(0,0,0,0.2)',
         borderRadius: '5px',
+        bg: '#fff',
       }}
     >
-      <Paragraph sx={{ m: '0 auto', textAlign: 'left', flex: 5 }}>{title}</Paragraph>
-      {/*<Label sx={{ border: '1px solid red' }}>
-        <Checkbox onChange={toggleTaskComplete} />
-      </Label>*/}
-      <input type='checkbox' checked={completed} onChange={toggleTaskComplete} />
+      <Box>
+        <Paragraph variant='title' sx={{ m: '0 auto', textAlign: 'left', flex: 5 }}>
+          {title}
+        </Paragraph>
+        {
+          //<Paragraph variant='additional'>{formattedCreatedDate}</Paragraph> !
+        }
+      </Box>
+      <Label sx={{ display: 'none' }} htmlFor={`checkbox_${id}`} />
+      <Checkbox onChange={toggleTaskComplete} id={`checkbox_${id}`} checked={completed} />
     </Flex>
   );
 };

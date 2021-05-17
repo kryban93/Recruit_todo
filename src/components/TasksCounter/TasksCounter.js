@@ -24,7 +24,7 @@ const TasksCounter = () => {
         }}
       >
         <path
-          sx={{ fill: 'none', stroke: '#eee', strokeWidth: '3.8' }}
+          sx={{ fill: 'none', stroke: '#ddd', strokeWidth: '3.8' }}
           d='M18 2.0845
           a 15.9155 15.9155 0 0 1 0 31.831
           a 15.9155 15.9155 0 0 1 0 -31.831'

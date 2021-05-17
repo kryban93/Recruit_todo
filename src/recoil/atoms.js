@@ -1,4 +1,17 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
+
+const tasksListAtom = atom({
+  key: 'tasksListAtom',
+  default: selector({
+    key: 'tasksListAtom/Default',
+    get: async () => {
+      const response = await fetch('https://gorest.co.in/public-api/todos');
+      const data = await response.json();
+
+      return data.data;
+    },
+  }),
+});
 
 const searchValueAtom = atom({
   key: 'searchValueAtom',
@@ -11,6 +24,7 @@ const filterOptionAtom = atom({
 });
 
 const atoms = {
+  tasksListAtom,
   searchValueAtom,
   filterOptionAtom,
 };

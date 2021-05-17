@@ -3,16 +3,26 @@ import Loader from '../../components/Loader/Loader';
 import MainListWrapper from '../../components/MainListWrapper/MainListWrapper';
 import TasksCounter from '../../components/TasksCounter/TasksCounter';
 import TasksFilterSelect from '../../components/TasksFilterSelect/TasksFilterSelect';
+import { Flex } from 'theme-ui';
 
 const MainView = () => {
   return (
-    <section>
+    <Flex
+      as='section'
+      sx={{
+        flexDirection: 'column',
+        width: ['95%', '75%', '50%'],
+        position: 'relative',
+        m: ' 0 auto',
+        pt: '50px',
+      }}
+    >
       <React.Suspense fallback={<Loader />}>
         <TasksCounter />
         <TasksFilterSelect />
         <MainListWrapper />
       </React.Suspense>
-    </section>
+    </Flex>
   );
 };
 
