@@ -31,6 +31,7 @@ const Nav = () => {
       </Link>
       <Flex sx={{ width: '100%', flexGrow: 1, mr: '15px' }}>
         <Input
+          variant='search'
           sx={{ width: '90%' }}
           type='text'
           value={searchValue}

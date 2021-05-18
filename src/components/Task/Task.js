@@ -1,18 +1,45 @@
-import React from 'react';
-import { Flex, Paragraph, Label, Box, Button, Image } from '@theme-ui/components';
+import React, { useEffect, useState, useRef } from 'react';
+import { Flex, Label, Box, Button, Image, Input } from '@theme-ui/components';
 import { useRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
 import PropTypes from 'prop-types';
 import icons from '../../assets/icons';
+import Editable from '../Editable/Editable';
 
 /** @jsxImportSource theme-ui */
 const Task = ({ title, completed, id, created, updated, userId }) => {
   const { tasksListAtom } = atoms;
   const [atomTasksList, setAtomTasksList] = useRecoilState(tasksListAtom);
+  const [editableTitle, setEditableTitle] = useState(title);
+  const titleInputRef = useRef();
+
+  useEffect(() => {
+    setEditableTitle(title);
+  }, [title]);
+
+  const updateTaskTitle = () => {
+    let tempTasksArray = [...atomTasksList];
+    const index = tempTasksArray.findIndex((task) => task.id === id);
+    const toggledTask = {
+      title: editableTitle,
+      completed,
+      id,
+      created,
+      updated,
+      userId,
+    };
+
+    const newTasksList = [
+      ...atomTasksList.slice(0, index),
+      toggledTask,
+      ...atomTasksList.slice(index + 1),
+    ];
+    setAtomTasksList(newTasksList);
+  };
 
   const toggleTaskComplete = () => {
     let tempTasksArray = [...atomTasksList];
-    const index = tempTasksArray.findIndex((value) => value.id === id);
+    const index = tempTasksArray.findIndex((task) => task.id === id);
     const toggledTask = {
       title,
       completed: !completed,
@@ -31,12 +58,19 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
   };
 
   const deleteTask = () => {
-    const filteredTasksList = atomTasksList.filter((task) => task.id !== id);
-
-    setAtomTasksList(filteredTasksList);
+    console.log(id);
+    const tempTasksArray = [...atomTasksList];
+    const filteredTasksArray = tempTasksArray.filter((task) => task.id !== id);
+    setAtomTasksList(filteredTasksArray);
   };
 
-  //const formattedCreatedDate = Date(created);
+  const handleKeyDown = (event) => {
+    const { key } = event;
+    if (key === 'Enter') {
+      updateTaskTitle();
+    }
+  };
+
   return (
     <Flex
       sx={{
@@ -68,10 +102,17 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
         />
       </Label>
       <Box sx={{ width: '90%', textAlign: 'left' }}>
-        <Paragraph variant='title'>{title}</Paragraph>
-        {
-          //<Paragraph variant='additional'>{formattedCreatedDate}</Paragraph> !
-        }
+        <Editable title={editableTitle} placeholder={editableTitle} childRef={titleInputRef}>
+          <Input
+            type='text'
+            ref={titleInputRef}
+            value={editableTitle}
+            onChange={(event) => {
+              setEditableTitle(event.target.value);
+            }}
+            onKeyDown={(event) => handleKeyDown(event)}
+          />
+        </Editable>
       </Box>
       <Label sx={{ display: 'none' }} htmlFor={`checkbox_${id}`} />
       <Button sx={{ bg: 'transparent', height: '25px', flexGrow: 2 }} onClick={deleteTask}>
@@ -91,7 +132,7 @@ Task.propTypes = {
   title: PropTypes.string.isRequired,
   completed: PropTypes.bool.isRequired,
   id: PropTypes.number.isRequired,
-  created: PropTypes.string.isRequired,
-  updated: PropTypes.string.isRequired,
-  userId: PropTypes.number.isRequired,
+  created: PropTypes.string,
+  updated: PropTypes.string,
+  userId: PropTypes.number,
 };

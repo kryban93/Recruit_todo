@@ -6,12 +6,12 @@ const tasksListAtom = atom({
   default: selector({
     key: 'tasksListAtom/Default',
     get: async () => {
-      const response = await fetch('https://gorest.co.in/public-api/todos');
-      const data = await response.json();
-      //const mockedData = data;
+      //const response = await fetch('https://gorest.co.in/public-api/todos');
+      //const data = await response.json();
+      const mockedData = data;
 
-      //return mockedData;
-      return data.data;
+      return mockedData;
+      //return data.data;
     },
   }),
 });
