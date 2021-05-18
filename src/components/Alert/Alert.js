@@ -1,20 +1,39 @@
-import React, { useEffect } from 'react';
-import { Box, Paragraph } from 'theme-ui';
-import alerts from './alerts';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { Box, Container, Paragraph } from 'theme-ui';
+import { useRecoilValue } from 'recoil';
+import atoms from '../../recoil/atoms';
 
-const Alert = ({ code, alertType }) => {
-  useEffect();
+const Alert = () => {
+  const { activeAlertAtom } = atoms;
+  const currentAlert = useRecoilValue(activeAlertAtom);
+  const [isAlertVisible, setAlertVisibleState] = useState(false);
+
+  useEffect(() => {
+    setAlertVisibleState(true);
+    setTimeout(() => {
+      setAlertVisibleState(false);
+    }, 3000);
+  }, [currentAlert]);
   return (
-    <Box>
-      <Paragraph>{alerts[alertType][code].description}</Paragraph>
-    </Box>
+    <div>
+      {isAlertVisible && (
+        <Box
+          sx={{
+            position: 'fixed',
+            bottom: '0',
+            right: '0',
+            m: '10px',
+            p: '10px',
+            bg: `${currentAlert.type}`,
+            borderRadius: '5px',
+            border: '0.5px solid green',
+          }}
+        >
+          <Paragraph>{currentAlert.description}</Paragraph>
+        </Box>
+      )}
+    </div>
   );
 };
 
 export default Alert;
-
-Alert.propTypes = {
-  code: PropTypes.number.isRequired,
-  alertType: PropTypes.string.isRequired,
-};

@@ -43,6 +43,7 @@ const theme = {
     secondary: '#1d9335',
     grey: '#e1e5ea',
     warning: '#f55c47',
+    success: '#bdf086',
   },
   buttons: {
     primary: {

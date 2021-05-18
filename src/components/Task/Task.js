@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Flex, Label, Box, Button, Image, Input } from '@theme-ui/components';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
 import PropTypes from 'prop-types';
 import icons from '../../assets/icons';
@@ -8,9 +8,11 @@ import Editable from '../Editable/Editable';
 
 /** @jsxImportSource theme-ui */
 const Task = ({ title, completed, id, created, updated, userId }) => {
-  const { tasksListAtom } = atoms;
+  const { tasksListAtom, activeAlertAtom } = atoms;
   const [atomTasksList, setAtomTasksList] = useRecoilState(tasksListAtom);
   const [editableTitle, setEditableTitle] = useState(title);
+  const setAlertAtom = useSetRecoilState(activeAlertAtom);
+
   const titleInputRef = useRef();
 
   useEffect(() => {
@@ -35,6 +37,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
       ...atomTasksList.slice(index + 1),
     ];
     setAtomTasksList(newTasksList);
+    setAlertAtom({ type: 'success', description: 'Updated task title successfully' });
   };
 
   const toggleTaskComplete = () => {
@@ -55,6 +58,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
       ...atomTasksList.slice(index + 1),
     ];
     setAtomTasksList(newTasksList);
+    setAlertAtom({ type: 'success', description: 'Updated task successfully' });
   };
 
   const deleteTask = () => {
@@ -62,6 +66,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
     const tempTasksArray = [...atomTasksList];
     const filteredTasksArray = tempTasksArray.filter((task) => task.id !== id);
     setAtomTasksList(filteredTasksArray);
+    setAlertAtom({ type: 'success', description: 'Deleted task successfully' });
   };
 
   const handleKeyDown = (event) => {
@@ -82,6 +87,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
         borderRadius: '5px',
         bg: '#fff',
         transition: 'transform 0.2s ease-in',
+        postion: 'relative',
 
         '&:hover': {
           transform: 'scale(1.05)',
