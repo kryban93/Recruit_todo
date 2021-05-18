@@ -39,11 +39,11 @@ const theme = {
   colors: {
     text: '#000',
     background: '#fafafa',
-    primary: '#6bc95b',
+    primary: '#4cc790',
     secondary: '#1d9335',
     grey: '#e1e5ea',
     warning: '#f55c47',
-    success: '#bdf086',
+    success: '#4cc790',
   },
   buttons: {
     primary: {

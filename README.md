@@ -14,3 +14,10 @@
 - Możliwość wyszukiwania notatki po treści
 - Fetch API, komunikacja z serwerem - wykorzystać https://gorest.co.in API z todos
 - Theme UI do styli i komponentów
+
+### Wykorzystane technologie
+
+- React
+- React Router
+- Recoil.js
+- Theme UI

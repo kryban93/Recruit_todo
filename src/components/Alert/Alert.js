@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Container, Paragraph } from 'theme-ui';
+import { Box, Paragraph } from 'theme-ui';
 import { useRecoilValue } from 'recoil';
 import atoms from '../../recoil/atoms';
 
@@ -12,8 +12,9 @@ const Alert = () => {
     setAlertVisibleState(true);
     setTimeout(() => {
       setAlertVisibleState(false);
-    }, 3000);
+    }, 5000);
   }, [currentAlert]);
+
   return (
     <div>
       {isAlertVisible && (
@@ -27,6 +28,16 @@ const Alert = () => {
             bg: `${currentAlert.type}`,
             borderRadius: '5px',
             border: '0.5px solid green',
+            animation: 'move 0.4s ease-out forwards',
+
+            '@keyframes move': {
+              '0%': {
+                bottom: '-100px',
+              },
+              '100%': {
+                bottom: '0',
+              },
+            },
           }}
         >
           <Paragraph>{currentAlert.description}</Paragraph>

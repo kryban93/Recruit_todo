@@ -11,7 +11,7 @@ const MainView = () => {
       as='section'
       sx={{
         flexDirection: 'column',
-        width: ['95%', '75%', '50%'],
+        width: ['95%', '75%', '60%', '700px'],
         position: 'relative',
         m: ' 0 auto',
         pt: '50px',

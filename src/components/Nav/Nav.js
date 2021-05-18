@@ -19,12 +19,12 @@ const Nav = () => {
         transform: 'translateX(-50%)',
         alignItems: 'center',
         justifyContent: 'space-between',
-        width: ['100%', '85%', '75%', '50%'],
+        width: ['100%', '85%', '75%', '700px'],
         zIndex: 4,
         bg: 'background',
       }}
     >
-      <Link to='/'>
+      <Link to='/' onClick={() => setSearchValue('')}>
         <Button>
           <Image src={logo} alt='Logo Home button' />
         </Button>
