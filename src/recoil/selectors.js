@@ -1,6 +1,5 @@
 import { selector } from 'recoil';
 import atoms from './atoms';
-//import data from '../data/mockedData';
 
 const { searchValueAtom, filterOptionAtom, tasksListAtom } = atoms;
 

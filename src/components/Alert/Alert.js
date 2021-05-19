@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Box, Paragraph } from 'theme-ui';
 import { useRecoilValue } from 'recoil';
 import atoms from '../../recoil/atoms';
@@ -16,7 +16,7 @@ const Alert = () => {
   }, [currentAlert]);
 
   return (
-    <div>
+    <>
       {isAlertVisible && (
         <Box
           sx={{
@@ -43,7 +43,7 @@ const Alert = () => {
           <Paragraph>{currentAlert.description}</Paragraph>
         </Box>
       )}
-    </div>
+    </>
   );
 };
 

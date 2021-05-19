@@ -1,4 +1,3 @@
-import React from 'react';
 import { useRecoilValue } from 'recoil';
 import { Flex, Paragraph } from 'theme-ui';
 import selectors from '../../recoil/selectors';
@@ -11,7 +10,7 @@ const TasksCounter = () => {
 
   return (
     <Flex sx={{ flexDirection: 'column' }}>
-      <Paragraph>
+      <Paragraph sx={{ textAlign: 'center' }}>
         completed: {completedTasksNum}/{totalTasksNum}
       </Paragraph>
       <svg

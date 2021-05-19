@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
@@ -29,7 +28,7 @@ const Nav = () => {
           <Image src={logo} alt='Logo Home button' />
         </Button>
       </Link>
-      <Flex sx={{ width: '100%', flexGrow: 1, mr: '15px' }}>
+      <Flex sx={{ width: '100%', flexGrow: 1, m: ' 0 20px' }}>
         <Input
           variant='search'
           sx={{ width: '90%' }}

@@ -1,5 +1,4 @@
 import { Box, Container } from '@theme-ui/components';
-import React from 'react';
 
 const Loader = () => {
   const generateBoxes = () => {

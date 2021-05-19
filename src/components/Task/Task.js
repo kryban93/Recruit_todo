@@ -41,7 +41,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
   };
 
   const toggleTaskComplete = () => {
-    let tempTasksArray = [...atomTasksList];
+    const tempTasksArray = [...atomTasksList];
     const index = tempTasksArray.findIndex((task) => task.id === id);
     const toggledTask = {
       title,
@@ -69,8 +69,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
     setAlertAtom({ type: 'success', description: 'Deleted task successfully' });
   };
 
-  const handleKeyDown = (event) => {
-    const { key } = event;
+  const handleKeyDown = ({ key }) => {
     if (key === 'Enter') {
       updateTaskTitle();
     }
@@ -104,11 +103,16 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
           onChange={toggleTaskComplete}
           id={`checkbox_${id}`}
           checked={completed}
-          sx={{ display: 'none' }}
+          sx={{ display: 'none', width: '300px' }}
         />
       </Label>
       <Box sx={{ width: '90%', textAlign: 'left' }}>
-        <Editable title={editableTitle} placeholder={editableTitle} childRef={titleInputRef}>
+        <Editable
+          title={editableTitle}
+          placeholder={editableTitle}
+          childRef={titleInputRef}
+          updateTaskTitle={updateTaskTitle}
+        >
           <Input
             type='text'
             ref={titleInputRef}
@@ -120,7 +124,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
           />
         </Editable>
       </Box>
-      <Label sx={{ display: 'none' }} htmlFor={`checkbox_${id}`} />
+
       <Button sx={{ bg: 'transparent', height: '25px', flexGrow: 2 }} onClick={deleteTask}>
         <Image
           src={icons.deleteIcon}

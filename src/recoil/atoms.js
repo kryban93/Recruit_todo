@@ -1,5 +1,4 @@
-import { atom, selector, useSetRecoilState } from 'recoil';
-
+import { atom, selector } from 'recoil';
 import data from '../data/mockedData';
 
 const tasksListAtom = atom({
@@ -9,7 +8,6 @@ const tasksListAtom = atom({
     get: async () => {
       //const response = await fetch('https://gorest.co.in/public-api/todos');
       //const data = await response.json();
-
       const mockedData = data;
 
       return mockedData;

@@ -1,4 +1,3 @@
-import React from 'react';
 import { Flex } from 'theme-ui';
 import Task from '../Task/Task';
 import PropTypes from 'prop-types';
