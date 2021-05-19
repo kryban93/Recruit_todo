@@ -24,7 +24,7 @@ const Editable = ({ title, children, placeholder, childRef, updateTaskTitle }) =
           <Paragraph>{title || placeholder || 'Please write a task title'}</Paragraph>
         </Box>
       ) : (
-        <Flex>{children}</Flex>
+        <Flex sx={{ width: '100%' }}>{children}</Flex>
       )}
       {isEditable && (
         <Button onClick={() => handleClick()} sx={{ bg: 'transparent', height: '25px' }}>
@@ -45,4 +45,5 @@ Editable.propTypes = {
   title: PropTypes.string.isRequired,
   placeholder: PropTypes.string,
   children: PropTypes.element,
+  updateTaskTitle: PropTypes.func.isRequired,
 };

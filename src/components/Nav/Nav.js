@@ -22,9 +22,10 @@ const Nav = () => {
         zIndex: 4,
         bg: 'background',
       }}
+      data-testid='nav'
     >
       <Link to='/' onClick={() => setSearchValue('')}>
-        <Button>
+        <Button data-testid='logo-button'>
           <Image src={logo} alt='Logo Home button' />
         </Button>
       </Link>

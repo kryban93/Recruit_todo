@@ -1,4 +1,4 @@
-import { Box, Container } from '@theme-ui/components';
+import { Box, Flex } from '@theme-ui/components';
 
 const Loader = () => {
   const generateBoxes = () => {
@@ -37,7 +37,7 @@ const Loader = () => {
 
     return boxes;
   };
-  return <Container sx={{ m: '200px auto' }}>{generateBoxes()}</Container>;
+  return <Flex sx={{ m: '200px auto', justifyContent: 'center' }}>{generateBoxes()}</Flex>;
 };
 
 export default Loader;

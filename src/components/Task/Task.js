@@ -121,6 +121,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
               setEditableTitle(event.target.value);
             }}
             onKeyDown={(event) => handleKeyDown(event)}
+            sx={{ width: '100%' }}
           />
         </Editable>
       </Box>
