@@ -5,6 +5,7 @@ import atoms from '../../recoil/atoms';
 import PropTypes from 'prop-types';
 import icons from '../../assets/icons';
 import Editable from '../Editable/Editable';
+import { deleteTaskFetch } from '../../requests';
 
 /** @jsxImportSource theme-ui */
 const Task = ({ title, completed, id, created, updated, userId }) => {
@@ -61,12 +62,18 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
     setAlertAtom({ type: 'success', description: 'Updated task successfully' });
   };
 
-  const deleteTask = () => {
-    console.log(id);
+  const deleteTask = async () => {
+    /* console.log(id);
     const tempTasksArray = [...atomTasksList];
     const filteredTasksArray = tempTasksArray.filter((task) => task.id !== id);
-    setAtomTasksList(filteredTasksArray);
-    setAlertAtom({ type: 'success', description: 'Deleted task successfully' });
+    setAtomTasksList(filteredTasksArray); */
+    await deleteTaskFetch(id)
+      .then(() => {
+        setAlertAtom({ type: 'success', description: 'Deleted task successfully' });
+      })
+      .catch((error) => {
+        setAlertAtom({ type: 'warning', description: `Error while deleting task: ${error} ` });
+      });
   };
 
   const handleKeyDown = ({ key }) => {

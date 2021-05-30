@@ -2,13 +2,27 @@ import React, { useState } from 'react';
 import { Button, Flex, Heading, Input, Image } from 'theme-ui';
 import icons from '../../assets/icons';
 import PropTypes from 'prop-types';
+import { addTaskFetch } from '../../requests';
+import { useSetRecoilState } from 'recoil';
+import atoms from '../../recoil/atoms';
 
 /** @jsxImportSource theme-ui */
 const TaskForm = ({ handleOpenFormModal }) => {
   const [taskTitle, setTaskTitle] = useState('');
+  const { activeAlertAtom } = atoms;
   const [isTaskCompleted, setTaskCompletedState] = useState(false);
-  const handleFormSubmit = (event) => {
+  const setAlertAtom = useSetRecoilState(activeAlertAtom);
+
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
+
+    await addTaskFetch(taskTitle)
+      .then(() => {
+        setAlertAtom({ type: 'success', description: 'Added new task successfully' });
+      })
+      .catch((error) => {
+        setAlertAtom({ type: 'warning', description: `Error while creating task: ${error} ` });
+      });
   };
   return (
     <Flex

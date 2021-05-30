@@ -22,7 +22,7 @@ const Alert = () => {
           sx={{
             position: 'fixed',
             bottom: '0',
-            right: '0',
+            left: '0',
             m: '10px',
             p: '10px',
             bg: `${currentAlert.type}`,
