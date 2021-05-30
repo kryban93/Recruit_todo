@@ -5,14 +5,16 @@ import atoms from '../../recoil/atoms';
 import PropTypes from 'prop-types';
 import icons from '../../assets/icons';
 import Editable from '../Editable/Editable';
-import { deleteTaskFetch } from '../../requests';
+import requests from '../../requests';
 
 /** @jsxImportSource theme-ui */
 const Task = ({ title, completed, id, created, updated, userId }) => {
-  const { tasksListAtom, activeAlertAtom } = atoms;
+  const { tasksListAtom, activeAlertAtom, tasksListRefresherAtom } = atoms;
+  const { deleteTaskFetch, updateTaskFinishStateFetch, changeTaskTitleFetch } = requests;
   const [atomTasksList, setAtomTasksList] = useRecoilState(tasksListAtom);
   const [editableTitle, setEditableTitle] = useState(title);
   const setAlertAtom = useSetRecoilState(activeAlertAtom);
+  const setRefresherValue = useSetRecoilState(tasksListRefresherAtom);
 
   const titleInputRef = useRef();
 
@@ -20,8 +22,8 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
     setEditableTitle(title);
   }, [title]);
 
-  const updateTaskTitle = () => {
-    let tempTasksArray = [...atomTasksList];
+  const updateTaskTitle = async () => {
+    /*let tempTasksArray = [...atomTasksList];
     const index = tempTasksArray.findIndex((task) => task.id === id);
     const toggledTask = {
       title: editableTitle,
@@ -37,12 +39,23 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
       toggledTask,
       ...atomTasksList.slice(index + 1),
     ];
-    setAtomTasksList(newTasksList);
-    setAlertAtom({ type: 'success', description: 'Updated task title successfully' });
+    setAtomTasksList(newTasksList);*/
+
+    await changeTaskTitleFetch(id, editableTitle)
+      .then(() => {
+        setRefresherValue((refreshValue) => refreshValue + 1);
+        setAlertAtom({ type: 'success', description: 'Updated task title successfully' });
+      })
+      .catch((error) => {
+        setAlertAtom({
+          type: 'warning',
+          description: `Error while updating task title: ${error} `,
+        });
+      });
   };
 
-  const toggleTaskComplete = () => {
-    const tempTasksArray = [...atomTasksList];
+  const toggleTaskComplete = async () => {
+    /*const tempTasksArray = [...atomTasksList];
     const index = tempTasksArray.findIndex((task) => task.id === id);
     const toggledTask = {
       title,
@@ -58,8 +71,15 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
       toggledTask,
       ...atomTasksList.slice(index + 1),
     ];
-    setAtomTasksList(newTasksList);
-    setAlertAtom({ type: 'success', description: 'Updated task successfully' });
+    setAtomTasksList(newTasksList);*/
+    await updateTaskFinishStateFetch(id, completed)
+      .then(() => {
+        setRefresherValue((refreshValue) => refreshValue + 1);
+        setAlertAtom({ type: 'success', description: 'Updated task successfully' });
+      })
+      .catch((error) => {
+        setAlertAtom({ type: 'warning', description: `Error updating task: ${error} ` });
+      });
   };
 
   const deleteTask = async () => {
@@ -69,6 +89,7 @@ const Task = ({ title, completed, id, created, updated, userId }) => {
     setAtomTasksList(filteredTasksArray); */
     await deleteTaskFetch(id)
       .then(() => {
+        setRefresherValue((refreshValue) => refreshValue + 1);
         setAlertAtom({ type: 'success', description: 'Deleted task successfully' });
       })
       .catch((error) => {

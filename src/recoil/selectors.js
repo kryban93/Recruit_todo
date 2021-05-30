@@ -1,13 +1,26 @@
 import { selector } from 'recoil';
 import atoms from './atoms';
 
-const { searchValueAtom, filterOptionAtom, tasksListAtom } = atoms;
+const { searchValueAtom, filterOptionAtom, tasksListAtom, tasksListRefresherAtom } = atoms;
+
+const fetchDataFromApiSelector = selector({
+  key: 'tasksListAtom/Default',
+  get: async ({ get }) => {
+    const refresherValue = get(tasksListRefresherAtom);
+    const response = await fetch('https://gorest.co.in/public-api/users/71/todos');
+    const data = await response.json();
+    //const mockedData = data;
+
+    //return mockedData;
+    return data.data;
+  },
+});
 
 const searchTasksSelector = selector({
   key: 'searchTasksSelector',
   get: ({ get }) => {
     const searchValue = new RegExp(get(searchValueAtom), 'gi');
-    const tasksList = get(tasksListAtom);
+    const tasksList = get(fetchDataFromApiSelector);
 
     const filteredTasksArray = tasksList.filter((task) => searchValue.test(task.title));
 
@@ -19,7 +32,7 @@ const searchTasksSelector = selector({
 const tasksCounterSelector = selector({
   key: 'tasksCounterSelector',
   get: ({ get }) => {
-    let tasksList = get(tasksListAtom);
+    let tasksList = get(fetchDataFromApiSelector);
 
     const totalTasksNum = tasksList.length;
     const completedTasksNum = tasksList.filter((task) => task.completed).length;
@@ -38,7 +51,7 @@ const filteredTasksListSelector = selector({
   key: 'filteredTasksListSelector',
   get: ({ get }) => {
     const filterOption = get(filterOptionAtom);
-    const tasksList = get(tasksListAtom);
+    const tasksList = get(fetchDataFromApiSelector);
 
     switch (filterOption) {
       case 'uncompleted':
@@ -52,6 +65,7 @@ const filteredTasksListSelector = selector({
 });
 
 const selectors = {
+  fetchDataFromApiSelector,
   searchTasksSelector,
   tasksCounterSelector,
   filteredTasksListSelector,

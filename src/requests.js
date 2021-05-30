@@ -1,6 +1,6 @@
 //prettier-ignore
 
-export const updateTaskFinishStateFetch = async (id, userId, completed) => {
+const updateTaskFinishStateFetch = async (id, completed) => {
     await fetch(`https://gorest.co.in/public-api/todos/${id}`, {
       method: 'PUT',
       headers: {
@@ -10,12 +10,12 @@ export const updateTaskFinishStateFetch = async (id, userId, completed) => {
       },
       body: JSON.stringify({
         id,
-        completed: !completed,
+        completed: completed ? false : true,
       }),
     });
   };
 
-export const changeTaskTitleFetch = async (id, userId, title) => {
+const changeTaskTitleFetch = async (id, title) => {
   await fetch(`https://gorest.co.in/public-api/todos/${id}`, {
     method: 'PUT',
     headers: {
@@ -24,14 +24,14 @@ export const changeTaskTitleFetch = async (id, userId, title) => {
       Authorization: `Bearer ${process.env.REACT_APP_ACCESS_TOKEN}`,
     },
     body: JSON.stringify({
-      id,
-      title,
+      id: id,
+      title: title,
     }),
   });
 };
 
 //prettier-ignore
-export const addTaskFetch = async (title) => {
+const addTaskFetch = async (title) => {
   await fetch(`https://gorest.co.in/public-api/users/71/todos/`, {
     method: 'POST',
     mode: 'cors',
@@ -47,7 +47,7 @@ export const addTaskFetch = async (title) => {
   });
 };
 
-export const deleteTaskFetch = async (id) => {
+const deleteTaskFetch = async (id) => {
   await fetch(`https://gorest.co.in/public-api/todos/${id}`, {
     method: 'DELETE',
     mode: 'cors',
@@ -58,3 +58,12 @@ export const deleteTaskFetch = async (id) => {
     },
   });
 };
+
+const requests = {
+  updateTaskFinishStateFetch,
+  changeTaskTitleFetch,
+  addTaskFetch,
+  deleteTaskFetch,
+};
+
+export default requests;

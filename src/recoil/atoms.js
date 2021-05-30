@@ -16,6 +16,11 @@ const tasksListAtom = atom({
   }),
 });
 
+const tasksListRefresherAtom = atom({
+  key: 'tasksListRefresherAtom',
+  default: 0,
+});
+
 const searchValueAtom = atom({
   key: 'searchValueAtom',
   default: '',
@@ -39,6 +44,7 @@ const atoms = {
   searchValueAtom,
   filterOptionAtom,
   activeAlertAtom,
+  tasksListRefresherAtom,
 };
 
 export default atoms;
