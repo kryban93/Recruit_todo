@@ -6,7 +6,7 @@ const tasksListAtom = atom({
   default: selector({
     key: 'tasksListAtom/Default',
     get: async () => {
-      const response = await fetch('https://gorest.co.in/public-api/todos');
+      const response = await fetch('https://gorest.co.in/public-api/users/71/todos');
       const data = await response.json();
       //const mockedData = data;
 

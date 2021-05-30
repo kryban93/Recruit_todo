@@ -59,6 +59,12 @@ const theme = {
       display: 'flex',
       alignItems: 'center',
     },
+    add: {
+      bg: 'primary',
+      cursor: 'pointer',
+      height: '45px',
+      borderRadius: '5px',
+    },
   },
   forms: {
     input: {
@@ -76,6 +82,15 @@ const theme = {
       borderRadius: '5px 0px 0px 5px',
       height: '35px',
       width: '60%',
+    },
+    add: {
+      fontFamily: 'body',
+      color: 'text',
+      bg: 'grey',
+      border: 'none',
+      outline: 'none',
+      height: '35px',
+      p: '10px',
     },
   },
   styles: {},
