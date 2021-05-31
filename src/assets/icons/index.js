@@ -5,6 +5,7 @@ import check_grey from './check_grey.svg';
 import edit from './edit.svg';
 import plus_white from './plus_white.svg';
 import close_black from './close_black.svg';
+import dots_black from './dots_black.svg';
 
 const icons = {
   search,
@@ -14,6 +15,7 @@ const icons = {
   edit,
   plus_white,
   close_black,
+  dots_black,
 };
 
 export default icons;

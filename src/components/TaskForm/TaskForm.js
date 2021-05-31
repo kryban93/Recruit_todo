@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import requests from '../../requests';
 import { useSetRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
+import TaskCheckbox from '../TaskCheckbox/TaskCheckbox';
 
 /** @jsxImportSource theme-ui */
 const TaskForm = ({ handleOpenFormModal }) => {
@@ -20,9 +21,9 @@ const TaskForm = ({ handleOpenFormModal }) => {
 
     await addTaskFetch(taskTitle)
       .then(() => {
+        handleOpenFormModal();
         setRefresherValue((refreshValue) => refreshValue + 1);
         setAlertAtom({ type: 'success', description: 'Added new task successfully' });
-        handleOpenFormModal();
       })
       .catch((error) => {
         setAlertAtom({ type: 'warning', description: `Error while creating task: ${error} ` });
@@ -47,7 +48,7 @@ const TaskForm = ({ handleOpenFormModal }) => {
         onSubmit={handleFormSubmit}
         sx={{
           width: '400px',
-          height: '400px',
+          height: '250px',
           bg: 'white',
           m: '0 auto',
           flexDirection: 'column',
@@ -55,6 +56,7 @@ const TaskForm = ({ handleOpenFormModal }) => {
           position: 'relative',
           boxSizing: 'border-box',
           p: '5px',
+          borderRadius: '5px',
         }}
       >
         <Button
@@ -73,7 +75,9 @@ const TaskForm = ({ handleOpenFormModal }) => {
           placeholder='Title'
         />
 
-        <Button variant='add' sx={{ position: 'absolute', bottom: '10px' }}>
+        <Button
+          sx={{ position: 'absolute', bottom: '10px', bg: 'primary', p: '5px 10px', fontSize: 4 }}
+        >
           add
         </Button>
       </Flex>

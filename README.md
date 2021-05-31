@@ -4,6 +4,12 @@
 
 ## Wymagania/skorzystaj z:
 
+- Pełna komunikacja CRUD:
+  - pobieranie listy zadań
+  - dodawanie nowego
+  - szczegóły
+  - edycję
+  - usuwanie
 - Routing w react router (np. do osobnych widoków zadań, podgląd konkretnego zadania)
 - Recoil
 - do:
