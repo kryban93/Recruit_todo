@@ -28,7 +28,7 @@
 - Recoil.js
 - Theme UI
 
-# To properly receive data from API there is necessary to create .env file with your access token:
+# W celu poprawnego odczytania/zapisania danych z API, należy utworzyć plik .env, i przypisać w nim access token
 
 ```Javascript
 REACT_APP_ACCESS_TOKEN=ACCESS__TOKEN
