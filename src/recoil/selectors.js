@@ -1,7 +1,7 @@
 import { selector } from 'recoil';
 import atoms from './atoms';
 
-const { searchValueAtom, filterOptionAtom, tasksListAtom, tasksListRefresherAtom } = atoms;
+const { searchValueAtom, filterOptionAtom, tasksListRefresherAtom } = atoms;
 
 const fetchDataFromApiSelector = selector({
   key: 'tasksListAtom/Default',

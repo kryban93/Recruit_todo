@@ -62,11 +62,11 @@ const theme = {
     add: {
       bg: 'primary',
       cursor: 'pointer',
-      height: '35px',
-      width: '50px',
       borderRadius: '5px',
+      p: '0',
       display: 'flex',
       alignItems: 'center',
+      boxSizing: 'border-box',
     },
   },
   forms: {

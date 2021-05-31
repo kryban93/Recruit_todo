@@ -1,6 +1,6 @@
-import { atom, selector } from 'recoil';
-import data from '../data/mockedData';
+import { atom } from 'recoil';
 
+/*
 const tasksListAtom = atom({
   key: 'tasksListAtom',
   default: selector({
@@ -14,7 +14,7 @@ const tasksListAtom = atom({
       return data.data;
     },
   }),
-});
+}); */
 
 const tasksListRefresherAtom = atom({
   key: 'tasksListRefresherAtom',
@@ -40,7 +40,6 @@ const activeAlertAtom = atom({
 });
 
 const atoms = {
-  tasksListAtom,
   searchValueAtom,
   filterOptionAtom,
   activeAlertAtom,

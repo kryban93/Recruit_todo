@@ -34,7 +34,7 @@ const MainView = () => {
         sx={{ position: 'fixed', bottom: '5px', right: '5px' }}
         onClick={() => setFormModalOpenState(!isFormModalOpen)}
       >
-        <Image src={icons.plus_white} alt='open task form button' sx={{ height: '30px' }} />
+        <Image src={icons.plus_white} alt='open task form button' />
       </Button>
       {isFormModalOpen && <TaskForm handleOpenFormModal={handleOpenFormModal} />}
     </Flex>

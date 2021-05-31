@@ -82,7 +82,7 @@ const TaskForm = ({ handleOpenFormModal }) => {
         >
           <Image src={icons.close_black} alt='close form modal button' />
         </Button>
-        <Heading as='h2' sx={{ m: '50px 0 10px' }}>
+        <Heading as='h3' sx={{ m: '50px 0 10px' }}>
           What's your next task?
         </Heading>
         <Input
