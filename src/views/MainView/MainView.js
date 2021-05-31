@@ -31,7 +31,7 @@ const MainView = () => {
       </React.Suspense>
       <Button
         variant='add'
-        sx={{ position: 'absolute', bottom: '5px', right: '5px' }}
+        sx={{ position: 'fixed', bottom: '5px', right: '5px' }}
         onClick={() => setFormModalOpenState(!isFormModalOpen)}
       >
         <Image src={icons.plus_white} alt='open task form button' sx={{ height: '30px' }} />

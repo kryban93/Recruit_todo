@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Flex, Label, Box, Button, Image, Input } from '@theme-ui/components';
+import { Flex, Box, Button, Image, Input } from '@theme-ui/components';
 import { useSetRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
 import PropTypes from 'prop-types';

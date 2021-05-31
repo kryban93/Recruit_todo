@@ -5,20 +5,20 @@ import PropTypes from 'prop-types';
 import requests from '../../requests';
 import { useSetRecoilState } from 'recoil';
 import atoms from '../../recoil/atoms';
-import TaskCheckbox from '../TaskCheckbox/TaskCheckbox';
+import Loader from '../Loader/Loader';
 
 /** @jsxImportSource theme-ui */
 const TaskForm = ({ handleOpenFormModal }) => {
   const [taskTitle, setTaskTitle] = useState('');
   const { activeAlertAtom, tasksListRefresherAtom } = atoms;
+  const [isLoaderActive, setLoaderState] = useState(false);
   const { addTaskFetch } = requests;
-  const [isTaskCompleted, setTaskCompletedState] = useState(false);
   const setAlertAtom = useSetRecoilState(activeAlertAtom);
   const setRefresherValue = useSetRecoilState(tasksListRefresherAtom);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-
+    setLoaderState(true);
     await addTaskFetch(taskTitle)
       .then(() => {
         handleOpenFormModal();
@@ -28,6 +28,23 @@ const TaskForm = ({ handleOpenFormModal }) => {
       .catch((error) => {
         setAlertAtom({ type: 'warning', description: `Error while creating task: ${error} ` });
       });
+    setLoaderState(false);
+  };
+
+  const handleKeyDown = async ({ key }) => {
+    if (key === 'Enter') {
+      setLoaderState(true);
+      await addTaskFetch(taskTitle)
+        .then(() => {
+          handleOpenFormModal();
+          setRefresherValue((refreshValue) => refreshValue + 1);
+          setAlertAtom({ type: 'success', description: 'Added new task successfully' });
+        })
+        .catch((error) => {
+          setAlertAtom({ type: 'warning', description: `Error while creating task: ${error} ` });
+        });
+      setLoaderState(false);
+    }
   };
   return (
     <Flex
@@ -73,6 +90,9 @@ const TaskForm = ({ handleOpenFormModal }) => {
           onChange={(event) => setTaskTitle(event.target.value)}
           value={taskTitle}
           placeholder='Title'
+          onKeyDown={(event) => {
+            handleKeyDown(event);
+          }}
         />
 
         <Button
@@ -81,6 +101,8 @@ const TaskForm = ({ handleOpenFormModal }) => {
           add
         </Button>
       </Flex>
+
+      {isLoaderActive && <Loader />}
     </Flex>
   );
 };
