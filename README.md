@@ -27,3 +27,9 @@
 - React Router
 - Recoil.js
 - Theme UI
+
+# To properly receive data from API there is necessary to create .env file with your access token:
+
+```Javascript
+REACT_APP_ACCESS_TOKEN=ACCESS__TOKEN
+```
